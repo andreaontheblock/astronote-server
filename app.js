@@ -21,7 +21,7 @@ const app = express();
 // ---- database
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/final-project', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
@@ -30,7 +30,7 @@ mongoose.connect('mongodb://localhost/final-project', {
 
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: [process.env.CLIENT_URL]
 }));
 app.use(logger('dev'));
 app.use(express.json());
