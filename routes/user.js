@@ -20,7 +20,11 @@ router.get('/:id', (req, res, next) => {
     Notes.find({owner: req.params.id})
   ];
   Promise.all(promises)
-    .then((data) => {
+    .then((results) => {
+      const data = {
+        user: results[0],
+        notes: results[1]
+      };
       return res.status(200).json(data);
     })
     .catch(next);
