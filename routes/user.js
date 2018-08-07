@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user');
+const Notes = require('../models/note');
 
 router.get('/', (req, res, next) => {
   User.find()
@@ -12,4 +13,16 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/:id', (req, res, next) => {
+  // pk vaina req.whatever UWU
+  const promises = [
+    User.findById(req.params.id),
+    Notes.find({owner: req.params.id})
+  ];
+  Promise.all(promises)
+    .then((data) => {
+      return res.status(200).json(data);
+    })
+    .catch(next);
+});
 module.exports = router;

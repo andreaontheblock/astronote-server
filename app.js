@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 
 const auth = require('./routes/auth');
 const user = require('./routes/user');
+const note = require('./routes/note');
 
 // ---- instantiations
 
@@ -53,6 +54,8 @@ app.use(session({
 
 app.use('/auth', auth);
 app.use('/user', user);
+// not sure.. this is a route of where it's stored on the backend
+app.use('/note', note);
 
 // --- error handling
 
