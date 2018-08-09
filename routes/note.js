@@ -25,4 +25,12 @@ router.get('/:id', (req, res, next) => {
     })
     .catch(next);
 });
+
+router.delete('/:id/delete', (req, res, next) => {
+  Note.findByIdAndRemove(req.params.id)
+    .then((data) => {
+      return res.status(200).json(data);
+    })
+    .catch(next);
+});
 module.exports = router;
